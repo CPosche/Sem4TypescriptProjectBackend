@@ -14,7 +14,11 @@ app.listen(port, () => {
   console.log(`Server running on port http://localhost:${port}...`);
 });
 
-app.use(cors());
+const corsOptions = {
+  origin: "*",
+};
+
+app.use(cors(corsOptions));
 
 mongoose
   .connect(
