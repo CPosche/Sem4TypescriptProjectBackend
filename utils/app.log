@@ -84,3 +84,11 @@
 [2023-04-04T12:17:46.660] [INFO] default - Request received: GET /api/v1/data/classes at Tue Apr 04 2023 12:17:46 GMT+0200 (Centraleuropæisk sommertid) with code 200
 [2023-04-04T12:25:54.643] [INFO] default - Request received: GET /api/v1/data/classes at Tue Apr 04 2023 12:25:54 GMT+0200 (Centraleuropæisk sommertid) with code 200
 [2023-04-04T12:25:54.654] [INFO] default - Request received: GET /api/v1/data/classes at Tue Apr 04 2023 12:25:54 GMT+0200 (Centraleuropæisk sommertid) with code 200
+[2023-04-04T12:32:42.879] [INFO] default - Request received: GET / at Tue Apr 04 2023 12:32:42 GMT+0200 (Centraleuropæisk sommertid) with code 200
+[2023-04-04T12:32:54.260] [INFO] default - Request received: GET /api/v1/data/classes at Tue Apr 04 2023 12:32:54 GMT+0200 (Centraleuropæisk sommertid) with code 200
+[2023-04-04T12:33:14.840] [INFO] default - Request received: GET /api/v1/data/classes at Tue Apr 04 2023 12:33:14 GMT+0200 (Centraleuropæisk sommertid) with code 200
+[2023-04-04T12:33:14.846] [INFO] default - Request received: GET /api/v1/data/classes at Tue Apr 04 2023 12:33:14 GMT+0200 (Centraleuropæisk sommertid) with code 200
+[2023-04-04T12:33:47.330] [INFO] default - Request received: GET /api/v1/data/classes at Tue Apr 04 2023 12:33:47 GMT+0200 (Centraleuropæisk sommertid) with code 200
+[2023-04-04T12:33:47.345] [INFO] default - Request received: GET /api/v1/data/classes at Tue Apr 04 2023 12:33:47 GMT+0200 (Centraleuropæisk sommertid) with code 200
+[2023-04-04T12:34:08.543] [INFO] default - Request received: GET /api/v1/data/classes at Tue Apr 04 2023 12:34:08 GMT+0200 (Centraleuropæisk sommertid) with code 200
+[2023-04-04T12:34:08.557] [INFO] default - Request received: GET /api/v1/data/classes at Tue Apr 04 2023 12:34:08 GMT+0200 (Centraleuropæisk sommertid) with code 200
