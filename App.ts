@@ -4,6 +4,7 @@ import express = require("express");
 import morgan = require("morgan");
 import Poprouter from "./routes/DataRoute";
 import logger from "./utils/logger";
+import cors from "cors";
 
 const app = express();
 if (process.env.NODE_ENV === "development") {
@@ -19,6 +20,8 @@ app.use((req, res, next) => {
   );
   next();
 });
+
+app.use(cors());
 
 app.use(express.json());
 
