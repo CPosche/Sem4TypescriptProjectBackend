@@ -1,8 +1,6 @@
 import app from "./App";
 import * as dotenv from "dotenv";
 import mongoose from "mongoose";
-import express = require("express");
-import logger from "./utils/logger";
 dotenv.config();
 import { ServerApiVersion } from "mongodb";
 const credentials = "./X509-cert-4329077070500209452.pem";
