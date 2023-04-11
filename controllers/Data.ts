@@ -5,7 +5,7 @@ import ClassModel from "../models/ClassModel";
 
 const getItem = async (req: Request, res: Response) => {
   const apiurl =
-    "https://us.api.blizzard.com/data/wow/item/193645?namespace=static-us&locale=en_US&access_token=EUHN1Ua8W8imYHe92ERv48o4GSO9PZtmGH";
+    "https://us.api.blizzard.com/data/wow/item/19019?namespace=static-us&locale=en_US&access_token=EU5wx2wXIu6Sk9mzpAixroqkkSfpsGcUpp";
   const data = await axios.get<TItem>(apiurl);
   const item = data.data;
   res.status(200).json({
