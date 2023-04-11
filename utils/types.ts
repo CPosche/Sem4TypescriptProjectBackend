@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 export type TClass = {
-  id?: mongoose.Schema.Types.ObjectId;
+  id?: mongoose.Types.ObjectId;
   name: string;
   specs: TSpec[];
   armortype: string;
@@ -13,10 +13,10 @@ export type TSpec = {
 };
 
 export type TPreviewItem = {
-  invetory_type: TInventoryType;
+  inventory_type: TInventoryType;
   item_subclass: TItemSubclass;
   stats: TStat[];
-  item_level: TItemLevel;
+  level: TItemLevel;
 };
 
 export type TItemLevel = {
@@ -41,12 +41,17 @@ export type TStatDisplay = {
 };
 
 export type TItem = {
-  id?: mongoose.Schema.Types.ObjectId;
+  id?: mongoose.Types.ObjectId;
   name: string;
   preview_item: TPreviewItem;
 };
 
-export type TDungeon = {};
+export type TDungeon = {
+  id?: mongoose.Types.ObjectId;
+  name: string;
+  image: string;
+  items: mongoose.Types.ObjectId[];
+};
 
 export type TInventoryType = {
   type: string;

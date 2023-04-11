@@ -12,3 +12,17 @@
 [2023-04-11T11:31:42.381] [INFO] default - Request received: GET /api/v1/data at Tue Apr 11 2023 11:31:42 GMT+0200 (Centraleuropæisk sommertid) with code 200
 [2023-04-11T11:32:19.115] [INFO] default - Request received: GET /api/v1/data at Tue Apr 11 2023 11:32:19 GMT+0200 (Centraleuropæisk sommertid) with code 200
 [2023-04-11T11:32:28.158] [INFO] default - Request received: GET /favicon.ico at Tue Apr 11 2023 11:32:28 GMT+0200 (Centraleuropæisk sommertid) with code 200
+[2023-04-11T12:02:58.120] [INFO] default - Request received: GET / at Tue Apr 11 2023 12:02:58 GMT+0200 (Centraleuropæisk sommertid) with code 200
+[2023-04-11T12:03:05.592] [INFO] default - Request received: GET /api/v1/data at Tue Apr 11 2023 12:03:05 GMT+0200 (Centraleuropæisk sommertid) with code 200
+[2023-04-11T12:03:15.964] [INFO] default - Request received: GET /favicon.ico at Tue Apr 11 2023 12:03:15 GMT+0200 (Centraleuropæisk sommertid) with code 200
+[2023-04-11T12:16:41.214] [INFO] default - Request received: GET /api/v1/data at Tue Apr 11 2023 12:16:41 GMT+0200 (Centraleuropæisk sommertid) with code 200
+[2023-04-11T12:20:37.856] [INFO] default - Request received: GET /api/v1/data at Tue Apr 11 2023 12:20:37 GMT+0200 (Centraleuropæisk sommertid) with code 200
+[2023-04-11T12:21:22.023] [INFO] default - Request received: GET /api/v1/data at Tue Apr 11 2023 12:21:22 GMT+0200 (Centraleuropæisk sommertid) with code 200
+[2023-04-11T12:22:09.342] [INFO] default - Request received: GET /api/v1/data at Tue Apr 11 2023 12:22:09 GMT+0200 (Centraleuropæisk sommertid) with code 200
+[2023-04-11T12:23:49.006] [INFO] default - Request received: GET /api/v1/data at Tue Apr 11 2023 12:23:49 GMT+0200 (Centraleuropæisk sommertid) with code 200
+[2023-04-11T13:39:51.175] [INFO] default - Request received: GET / at Tue Apr 11 2023 13:39:51 GMT+0200 (Centraleuropæisk sommertid) with code 200
+[2023-04-11T13:40:01.997] [INFO] default - Request received: GET /api/v1/data at Tue Apr 11 2023 13:40:01 GMT+0200 (Centraleuropæisk sommertid) with code 200
+[2023-04-11T13:47:18.966] [INFO] default - Request received: GET /api/v1/data at Tue Apr 11 2023 13:47:18 GMT+0200 (Centraleuropæisk sommertid) with code 200
+[2023-04-11T13:50:17.821] [INFO] default - Request received: GET /api/v1/data at Tue Apr 11 2023 13:50:17 GMT+0200 (Centraleuropæisk sommertid) with code 200
+[2023-04-11T13:56:12.828] [INFO] default - Request received: GET /api/v1/data at Tue Apr 11 2023 13:56:12 GMT+0200 (Centraleuropæisk sommertid) with code 200
+[2023-04-11T13:59:06.943] [INFO] default - Request received: GET /api/v1/data at Tue Apr 11 2023 13:59:06 GMT+0200 (Centraleuropæisk sommertid) with code 200
