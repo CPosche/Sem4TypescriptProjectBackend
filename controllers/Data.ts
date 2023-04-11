@@ -27,7 +27,7 @@ const getDungeons = async (req: Request, res: Response) => {
     dungeons.push(data);
   }
   for (let dungeon of dungeons) {
-    for (let item of dungeon.items) {
+    for (let encounter of dungeon.encounters) {
     }
   }
   res.status(200).json({
