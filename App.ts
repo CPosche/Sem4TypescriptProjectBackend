@@ -2,7 +2,7 @@ import * as dotenv from "dotenv";
 dotenv.config();
 import express = require("express");
 import morgan = require("morgan");
-import Poprouter from "./routes/DataRoute";
+import Datarouter from "./routes/DataRoute";
 import logger from "./utils/logger";
 import cors from "cors";
 
@@ -25,6 +25,6 @@ app.use(cors());
 
 app.use(express.json());
 
-app.use("/api/v1/data", Poprouter);
+app.use("/api/v1/data", Datarouter);
 
 export default app;
