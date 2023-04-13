@@ -53,13 +53,13 @@ const typeDefs = gql`
   }
 
   type ItemSubclass {
-    type: String
+    id: Int
     name: String
   }
 
   type Query {
-    hello: String
     dungeons: [Dungeon]
+    items: [Item]
   }
 `;
 

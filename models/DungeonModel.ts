@@ -15,7 +15,7 @@ const DungeonSchema = new mongoose.Schema({
   },
 });
 
-// populate items with item ids
+
 DungeonSchema.pre("find", function (next) {
   this.populate("items");
   next();

@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 export type TClass = {
-  id?: mongoose.Types.ObjectId;
+  _id?: mongoose.Types.ObjectId;
   name: string;
   specs: TSpec[];
   armortype: string;
@@ -41,13 +41,13 @@ export type TStatDisplay = {
 };
 
 export type TItem = {
-  id?: mongoose.Types.ObjectId;
+  _id?: mongoose.Types.ObjectId;
   name: string;
   preview_item: TPreviewItem;
 };
 
 export type TDungeon = {
-  id?: mongoose.Types.ObjectId;
+  _id?: mongoose.Types.ObjectId;
   name: string;
   image: string;
   items: mongoose.Types.ObjectId[];
