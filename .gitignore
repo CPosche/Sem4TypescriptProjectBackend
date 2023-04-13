@@ -2,3 +2,5 @@
 node_modules
 
 X509-cert-4329077070500209452.pem
+
+.env

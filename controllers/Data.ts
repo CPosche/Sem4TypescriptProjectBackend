@@ -16,11 +16,13 @@ import ClassModel from "../models/ClassModel";
 import ItemModel from "../models/ItemModel";
 import DungeonModel from "../models/DungeonModel";
 import mongoose from "mongoose";
+import OAuth from "../utils/OAuth";
 
 const getItem = async (itemids: Number[]) => {
+  const access_token = await OAuth.getAccessToken();
   let items: mongoose.Types.ObjectId[] = [];
   for (let itemid of itemids) {
-    const apiurl = `https://us.api.blizzard.com/data/wow/item/${itemid}?namespace=static-us&locale=en_US&access_token=EUUVzF1OlhYKon1b0uH3RhhW1APVDsDepB`;
+    const apiurl = `https://us.api.blizzard.com/data/wow/item/${itemid}?namespace=static-us&locale=en_US&access_token=${access_token}`;
     const data = await axios.get<TItem>(apiurl);
     const inventory_type: TInventoryType = {
       type: data.data.preview_item.inventory_type.type,
@@ -69,23 +71,24 @@ const getItem = async (itemids: Number[]) => {
 };
 
 const getDungeons = async (req: Request, res: Response) => {
+  const access_token = await OAuth.getAccessToken();
   const ids = await getMythicIds();
   let dungeons: TDungeon[] = [];
   let itemids: Number[] = [];
   for (let id of ids) {
-    const apiurl = `https://us.api.blizzard.com/data/wow/journal-instance/${id}?namespace=static-us&locale=en_US&access_token=EUUVzF1OlhYKon1b0uH3RhhW1APVDsDepB`;
+    const apiurl = `https://us.api.blizzard.com/data/wow/journal-instance/${id}?namespace=static-us&locale=en_US&access_token=${access_token}`;
     const data = await axios.get(apiurl).then((res) => res.data);
     const image = data.name
       .replaceAll(" ", "-")
       .toLowerCase()
       .replaceAll("'", "");
     for (let encounter of data.encounters) {
-      const encounterapi = `https://us.api.blizzard.com/data/wow/journal-encounter/${encounter.id}?namespace=static-us&locale=en_US&access_token=EUUVzF1OlhYKon1b0uH3RhhW1APVDsDepB`;
+      const encounterapi = `https://us.api.blizzard.com/data/wow/journal-encounter/${encounter.id}?namespace=static-us&locale=en_US&access_token=${access_token}`;
       const encounterdata = await axios
         .get(encounterapi)
         .then((res) => res.data);
       for (let item of encounterdata.items) {
-        itemids.push(item.item.id);
+        itemids.push(item.id);
       }
     }
     const items = await getItem(itemids);
@@ -105,8 +108,8 @@ const getDungeons = async (req: Request, res: Response) => {
 };
 
 const getMythicIds = async () => {
-  const apiurl =
-    "https://us.api.blizzard.com/data/wow/journal-expansion/505?namespace=static-us&locale=en_US&access_token=EUUVzF1OlhYKon1b0uH3RhhW1APVDsDepB";
+  const access_token = await OAuth.getAccessToken();
+  const apiurl = `https://us.api.blizzard.com/data/wow/journal-expansion/505?namespace=static-us&locale=en_US&access_token=${access_token}`;
   const data = await axios.get(apiurl).then((res) => res.data);
   const ids: Number[] = data.dungeons.map(
     (dungeon: { id: number }) => dungeon.id
