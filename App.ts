@@ -5,12 +5,23 @@ import morgan = require("morgan");
 import Datarouter from "./routes/DataRoute";
 import logger from "./utils/logger";
 import cors from "cors";
-
+import { ApolloServer } from "apollo-server-express";
+import typeDefs from "./graphql/Schema";
+import { Query } from "mongoose";
 const app = express();
+
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
   console.log("Development mode...");
 }
+
+const serverStart = async (server: ApolloServer) => {
+  await server.start();
+  server.applyMiddleware({ app });
+};
+
+const server = new ApolloServer({ typeDefs, resolvers: { Query } });
+serverStart(server);
 
 app.use((req, res, next) => {
   logger.info(

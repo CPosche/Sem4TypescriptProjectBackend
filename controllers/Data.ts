@@ -16,26 +16,29 @@ import ClassModel from "../models/ClassModel";
 import ItemModel from "../models/ItemModel";
 import DungeonModel from "../models/DungeonModel";
 import mongoose from "mongoose";
+import OAuth from "../utils/OAuth";
 
 const getItem = async (itemids: Number[]) => {
+  const access_token = await OAuth.getAccessToken();
   let items: mongoose.Types.ObjectId[] = [];
   for (let itemid of itemids) {
-    const apiurl = `https://us.api.blizzard.com/data/wow/item/${itemid}?namespace=static-us&locale=en_US&access_token=EUUVzF1OlhYKon1b0uH3RhhW1APVDsDepB`;
-    const data = await axios.get<TItem>(apiurl);
+    const apiurl = `https://us.api.blizzard.com/data/wow/item/${itemid}?namespace=static-us&locale=en_US&access_token=${access_token}`;
+    const data = await axios.get<TItem>(apiurl).then((res) => res.data);
+    if (data.preview_item.inventory_type.type === "NON_EQUIP") continue;
     const inventory_type: TInventoryType = {
-      type: data.data.preview_item.inventory_type.type,
-      name: data.data.preview_item.inventory_type.name,
+      type: data.preview_item.inventory_type.type,
+      name: data.preview_item.inventory_type.name,
     };
     const item_level: TItemLevel = {
-      value: data.data.preview_item.level.value,
-      display_string: data.data.preview_item.level.display_string,
+      value: data.preview_item.level.value ? data.preview_item.level.value : 0,
+      display_string: data.preview_item.level.display_string,
     };
     const item_subclass: TItemSubclass = {
-      key: { href: data.data.preview_item.item_subclass.key.href },
-      id: data.data.preview_item.item_subclass.id,
-      name: data.data.preview_item.item_subclass.name,
+      key: { href: data.preview_item.item_subclass.key.href },
+      id: data.preview_item.item_subclass.id,
+      name: data.preview_item.item_subclass.name,
     };
-    const stats: TStat[] = data.data.preview_item.stats.map((stat) => {
+    const stats: TStat[] = data.preview_item.stats.map((stat) => {
       const type: TStatType = {
         type: stat.type.type,
         name: stat.type.name,
@@ -58,7 +61,7 @@ const getItem = async (itemids: Number[]) => {
       stats: stats,
     };
     const item: TItem = {
-      name: data.data.name,
+      name: data.name,
       preview_item: preview_item,
     };
     ItemModel.create(item).then((item) => {
@@ -69,25 +72,17 @@ const getItem = async (itemids: Number[]) => {
 };
 
 const getDungeons = async (req: Request, res: Response) => {
+  const access_token = await OAuth.getAccessToken();
   const ids = await getMythicIds();
   let dungeons: TDungeon[] = [];
-  let itemids: Number[] = [];
   for (let id of ids) {
-    const apiurl = `https://us.api.blizzard.com/data/wow/journal-instance/${id}?namespace=static-us&locale=en_US&access_token=EUUVzF1OlhYKon1b0uH3RhhW1APVDsDepB`;
+    const apiurl = `https://us.api.blizzard.com/data/wow/journal-instance/${id}?namespace=static-us&locale=en_US&access_token=${access_token}`;
     const data = await axios.get(apiurl).then((res) => res.data);
     const image = data.name
       .replaceAll(" ", "-")
       .toLowerCase()
       .replaceAll("'", "");
-    for (let encounter of data.encounters) {
-      const encounterapi = `https://us.api.blizzard.com/data/wow/journal-encounter/${encounter.id}?namespace=static-us&locale=en_US&access_token=EUUVzF1OlhYKon1b0uH3RhhW1APVDsDepB`;
-      const encounterdata = await axios
-        .get(encounterapi)
-        .then((res) => res.data);
-      for (let item of encounterdata.items) {
-        itemids.push(item.item.id);
-      }
-    }
+    const itemids = await getItemIds(data.encounters, access_token);
     const items = await getItem(itemids);
     const dungeon: TDungeon = {
       name: data.name,
@@ -104,9 +99,21 @@ const getDungeons = async (req: Request, res: Response) => {
   });
 };
 
+const getItemIds = async (encounters: any[], access_token: string) => {
+  let itemids: Number[] = [];
+  for (let encounter of encounters) {
+    const encounterapi = `https://us.api.blizzard.com/data/wow/journal-encounter/${encounter.id}?namespace=static-us&locale=en_US&access_token=${access_token}`;
+    const encounterdata = await axios.get(encounterapi).then((res) => res.data);
+    for (let item of encounterdata.items) {
+      itemids.push(item.item.id);
+    }
+  }
+  return itemids;
+};
+
 const getMythicIds = async () => {
-  const apiurl =
-    "https://us.api.blizzard.com/data/wow/journal-expansion/505?namespace=static-us&locale=en_US&access_token=EUUVzF1OlhYKon1b0uH3RhhW1APVDsDepB";
+  const access_token = await OAuth.getAccessToken();
+  const apiurl = `https://us.api.blizzard.com/data/wow/journal-expansion/505?namespace=static-us&locale=en_US&access_token=${access_token}`;
   const data = await axios.get(apiurl).then((res) => res.data);
   const ids: Number[] = data.dungeons.map(
     (dungeon: { id: number }) => dungeon.id
@@ -122,10 +129,19 @@ const getClasses = async (req: Request, res: Response) => {
   });
 };
 
+const getDungeonsFromDB = async (req: Request, res: Response) => {
+  const dungeons: TDungeon[] = await DungeonModel.find();
+  res.status(200).json({
+    status: "success",
+    data: dungeons,
+  });
+};
+
 const data = {
   getItem,
   getClasses,
   getDungeons,
+  getDungeonsFromDB,
 };
 
 export default data;

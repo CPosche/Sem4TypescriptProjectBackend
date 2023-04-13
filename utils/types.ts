@@ -20,13 +20,13 @@ export type TPreviewItem = {
 };
 
 export type TItemLevel = {
-  value: number;
+  value: Number;
   display_string: string;
 };
 
 export type TStat = {
   type: TStatType;
-  value: number;
+  value: Number;
   display: TStatDisplay;
 };
 
@@ -37,7 +37,7 @@ export type TStatType = {
 
 export type TStatDisplay = {
   display_string: string;
-  color: { r: number; g: number; b: number; a: number };
+  color: { r: Number; g: Number; b: Number; a: Number };
 };
 
 export type TItem = {
@@ -61,5 +61,5 @@ export type TInventoryType = {
 export type TItemSubclass = {
   key: { href: string };
   name: string;
-  id: number;
+  id: Number;
 };
