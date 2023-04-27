@@ -1,6 +1,7 @@
 import DungeonModel from "../../models/DungeonModel";
+import ItemModel from "../../models/ItemModel";
 
 export default {
-  hello: () => "Hello world!",
   dungeons: async (_parent: never, _args: never) => DungeonModel.find(),
+  items: async (_parent: never, _args: never) => ItemModel.find(),
 };

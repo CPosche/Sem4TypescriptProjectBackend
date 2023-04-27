@@ -15,14 +15,6 @@ if (process.env.NODE_ENV === "development") {
   console.log("Development mode...");
 }
 
-const serverStart = async (server: ApolloServer) => {
-  await server.start();
-  server.applyMiddleware({ app });
-};
-
-const server = new ApolloServer({ typeDefs, resolvers: { Query } });
-serverStart(server);
-
 app.use((req, res, next) => {
   logger.info(
     `Request received: ${req.method} ${req.url} at ${new Date()} with code ${
@@ -35,6 +27,15 @@ app.use((req, res, next) => {
 app.use(cors());
 
 app.use(express.json());
+
+
+const serverStart = async (server: ApolloServer) => {
+  await server.start();
+  server.applyMiddleware({ app });
+};
+
+const server = new ApolloServer({ typeDefs, resolvers: { Query } });
+serverStart(server);
 
 app.use("/api/v1/data", Datarouter);
 
