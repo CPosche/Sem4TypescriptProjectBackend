@@ -7,7 +7,7 @@ import logger from "./utils/logger";
 import cors from "cors";
 import { ApolloServer } from "apollo-server-express";
 import typeDefs from "./graphql/Schema";
-import { Query } from "mongoose";
+import Query from "./graphql/resolvers/Query";
 const app = express();
 
 if (process.env.NODE_ENV === "development") {
