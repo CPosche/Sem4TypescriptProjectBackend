@@ -1,24 +1,12 @@
 import app from "./App";
 import * as dotenv from "dotenv";
 import mongoose from "mongoose";
-import cors from "cors";
-import express = require("express");
-import logger from "./utils/logger";
 dotenv.config();
 import { ServerApiVersion } from "mongodb";
+
 const credentials = "./X509-cert-4329077070500209452.pem";
 
 const port = process.env.PORT;
-
-app.listen(port, () => {
-  console.log(`Server running on port http://localhost:${port}...`);
-});
-
-const corsOptions = {
-  origin: "*",
-};
-
-app.use(cors(corsOptions));
 
 mongoose
   .connect(
@@ -35,3 +23,8 @@ mongoose
   .catch((err) => {
     console.log("Error connecting to MongoDB", err.message);
   });
+
+app.listen(port, () => {
+  console.log(`Server running on port http://localhost:${port}...`);
+  console.log(`GraphQL running on port http://localhost:${port}/graphql...`)
+});

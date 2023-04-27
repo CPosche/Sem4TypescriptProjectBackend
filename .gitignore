@@ -1,2 +1,8 @@
+
+node_modules
+
 X509-cert-4329077070500209452.pem
-node-modules
+
+.env
+
+utils/app.log
