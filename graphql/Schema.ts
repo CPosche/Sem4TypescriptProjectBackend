@@ -7,6 +7,18 @@ const typeDefs = gql`
     items: [Item]
   }
 
+  type Class {
+    id: ID!
+    name: String!
+    specs: [Spec]
+    armortype: String!
+  }
+
+  type Spec {
+    name: String!
+    mainstat: String!
+  }
+
   type Item {
     name: String!
     preview_item: PreviewItem
@@ -60,6 +72,7 @@ const typeDefs = gql`
   type Query {
     dungeons: [Dungeon]
     items: [Item]
+    classes: [Class]
   }
 `;
 
