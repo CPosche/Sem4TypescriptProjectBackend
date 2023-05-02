@@ -17,14 +17,14 @@ if (process.env.NODE_ENV === "development") {
   console.log("Development mode...");
 }
 
-app.use((req, res, next) => {
-  logger.info(
-    `Request received: ${req.method} ${req.url} at ${new Date()} with code ${
-      res.statusCode
-    }`
-  );
-  next();
-});
+// app.use((req, res, next) => {
+//   logger.info(
+//     `Request received: ${req.method} ${req.url} at ${new Date()} with code ${
+//       res.statusCode
+//     }`
+//   );
+//   next();
+// });
 
 app.use(cors());
 
