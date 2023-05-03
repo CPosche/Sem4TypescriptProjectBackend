@@ -15,43 +15,39 @@ const generateToken = (payload: TUser) => {
     return token;
 };
 
-const login = async (req: Request, res: Response) => {
-    const { username, password } = req.body;
-
+const login = async (username: string, password: string) => {
     try{
-        const user = await User.findOne({ name: username });
+        const user = await User.findOne({ username: username });
 
         if(!user){
-            return res.status(401).json({ message: "Authentication failed" });
+            return {message: "Authentication failed"}
         }
 
         const passwordMatch = await bcrypt.compare(password, user.password);
 
         if(passwordMatch){
-            const token = generateToken({name: user.name });
-            return res.status(200).json({ token });
+            const token = generateToken({username: user.username });
+            return token
         }
         else{
-            return res.status(401).json({ message: "Authentication failed" });
+            return {message: "Authentication failed"}
         }
 
     }catch(err){
-        return res.status(400).json({message: "Something went wrong"});
+        return {message: "Something went wrong"}
     }
 };
 
-const register = async (req: Request, res: Response) => {
-        const { username, password } = req.body;
+const register = async (username: string, password: string) => {
 
         const hashedPassword = await bcrypt.hash(password, 10);
 
         try{
             console.log();
-            const user = await User.create({name: username, password: hashedPassword});
-            res.status(201).json({user , message: "User created successfully"});
+            const user = await User.create({username: username, password: hashedPassword});
+            return user;
         } catch(err){
-            res.status(500).json({username, hashedPassword,message: "Error creating user"});
-
+           return {message: "Something went wrong"};
         }
 };
 

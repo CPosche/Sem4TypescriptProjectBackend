@@ -9,6 +9,7 @@ import cors from "cors";
 import { ApolloServer } from "apollo-server-express";
 import typeDefs from "./graphql/Schema";
 import Query from "./graphql/resolvers/Query";
+import Mutation from "./graphql/resolvers/Mutations";
 import JWTMiddleware from "./middleware/JWTTokenMiddleWare";
 const app = express();
 
@@ -37,7 +38,7 @@ const serverStart = async (server: ApolloServer) => {
   server.applyMiddleware({ app });
 };
 
-const server = new ApolloServer({ typeDefs, resolvers: { Query } });
+const server = new ApolloServer({ typeDefs, resolvers: { Query, Mutation } });
 serverStart(server);
 
 app.use("/api/v1/data", Datarouter);

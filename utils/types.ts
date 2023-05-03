@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import {Request, Response} from "express";
 import {JwtPayload} from "jsonwebtoken";
 
 export type TClass = {
@@ -66,7 +67,7 @@ export type TItemSubclass = {
 };
 
 export type TUser = {
-    name: string;
+  username: string;
 }
 
 
@@ -78,4 +79,9 @@ export interface AuthRequest extends Request {
   user?: JwtPayload | undefined | string;
   headers: AuthHeaders;
 
+}
+
+export type Args = {
+  username: string;
+  password: string;
 }
