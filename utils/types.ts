@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import {JwtPayload} from "jsonwebtoken";
 
 export type TClass = {
   _id?: mongoose.Types.ObjectId;
@@ -63,3 +64,18 @@ export type TItemSubclass = {
   name: string;
   id: Number;
 };
+
+export type TUser = {
+    name: string;
+}
+
+
+interface AuthHeaders extends Headers {
+  authorization?: string;
+}
+
+export interface AuthRequest extends Request {
+  user?: JwtPayload | undefined | string;
+  headers: AuthHeaders;
+
+}
