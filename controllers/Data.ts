@@ -81,7 +81,8 @@ const getDungeons = async (req: Request, res: Response) => {
     const image = data.name
       .replaceAll(" ", "-")
       .toLowerCase()
-      .replaceAll("'", "");
+      .replaceAll("'", "")
+      .replaceAll(":", "");
     const itemids = await getItemIds(data.encounters, access_token);
     const items = await getItem(itemids);
     const dungeon: TDungeon = {

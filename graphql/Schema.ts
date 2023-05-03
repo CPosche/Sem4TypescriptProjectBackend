@@ -2,6 +2,7 @@ import { gql } from "apollo-server-express";
 
 const typeDefs = gql`
   type Dungeon {
+    id: ID!
     name: String!
     image: String
     items: [Item]
