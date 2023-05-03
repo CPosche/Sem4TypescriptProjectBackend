@@ -69,12 +69,32 @@ const typeDefs = gql`
     id: Int
     name: String
   }
+  type User {
+    username: String!
+    password: String!
+  }
+  
+  type returnedUser {
+    username: String!
+    id: ID!
+  }
 
   type Query {
     dungeons: [Dungeon]
     items: [Item]
     classes: [Class]
+    users: [User]
+  }
+
+  
+  type Mutation {
+    login(username: String!, password: String!): String
+    register(username: String!, password: String!): returnedUser
   }
 `;
+
+
+
+
 
 export default typeDefs;
