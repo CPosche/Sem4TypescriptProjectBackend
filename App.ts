@@ -3,14 +3,12 @@ dotenv.config();
 import express = require("express");
 import morgan = require("morgan");
 import Datarouter from "./routes/DataRoute";
-import UserRouter from "./routes/UserRouts";
 import logger from "./utils/logger";
 import cors from "cors";
 import { ApolloServer } from "apollo-server-express";
 import typeDefs from "./graphql/Schema";
 import Query from "./graphql/resolvers/Query";
 import Mutation from "./graphql/resolvers/Mutations";
-import JWTMiddleware from "./middleware/JWTTokenMiddleWare";
 const app = express();
 
 if (process.env.NODE_ENV === "development") {
@@ -42,6 +40,5 @@ const server = new ApolloServer({ typeDefs, resolvers: { Query, Mutation } });
 serverStart(server);
 
 app.use("/api/v1/data", Datarouter);
-app.use("/api/v1/user", UserRouter);
 
 export default app;

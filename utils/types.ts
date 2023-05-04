@@ -75,13 +75,8 @@ interface AuthHeaders extends Headers {
   authorization?: string;
 }
 
-export interface AuthRequest extends Request {
-  user?: JwtPayload | undefined | string;
-  headers: AuthHeaders;
-
-}
-
 export type Args = {
   username: string;
-  password: string;
+  password?: string;
+  classId?: string;
 }

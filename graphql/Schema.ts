@@ -70,23 +70,23 @@ const typeDefs = gql`
     name: String
   }
   type User {
-    username: String!
-    password: String!
+    username: String
+    id: ID
+    favoriteClass: Class
   }
   
   type returnedUser {
-    username: String!
-    id: ID!
-    status: Int!
+    user: User
+    status: Int
   }
-
+  
   type Query {
     dungeons: [Dungeon]
     items: [Item]
     classes: [Class]
     users: [User]
   }
-  
+
   type Token {
     message: String!
     status: Int!
@@ -96,11 +96,8 @@ const typeDefs = gql`
   type Mutation {
     login(username: String!, password: String!): Token
     register(username: String!, password: String!): returnedUser
+    addFavoriteClass(username: String! classId: ID!): returnedUser
   }
 `;
-
-
-
-
 
 export default typeDefs;
