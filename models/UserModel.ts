@@ -11,6 +11,12 @@ const UserSchema: mongoose.Schema = new mongoose.Schema({
         type: String,
         required: true
     },
+    favoriteClass: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Class',
+        required: false
+    },
+
 });
 
 const User = mongoose.model('User', UserSchema);

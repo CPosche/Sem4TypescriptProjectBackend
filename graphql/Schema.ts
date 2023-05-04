@@ -70,7 +70,8 @@ const typeDefs = gql`
   }
   type User {
     username: String!
-    password: String!
+    password: String
+    favoriteClass: Class
   }
   
   type returnedUser {
@@ -89,6 +90,7 @@ const typeDefs = gql`
   type Mutation {
     login(username: String!, password: String!): String
     register(username: String!, password: String!): returnedUser
+    addFavoriteClass(username: String! classId: ID!): User
   }
 `;
 
