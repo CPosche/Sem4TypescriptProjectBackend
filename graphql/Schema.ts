@@ -77,6 +77,7 @@ const typeDefs = gql`
   type returnedUser {
     username: String!
     id: ID!
+    status: Int!
   }
 
   type Query {
@@ -85,10 +86,15 @@ const typeDefs = gql`
     classes: [Class]
     users: [User]
   }
+  
+  type Token {
+    message: String!
+    status: Int!
+  }
 
   
   type Mutation {
-    login(username: String!, password: String!): String
+    login(username: String!, password: String!): Token
     register(username: String!, password: String!): returnedUser
   }
 `;

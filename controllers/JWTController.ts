@@ -9,9 +9,7 @@ dotenv.config();
 const jwtSecretKey: string = process.env.JWT_SECRET_KEY!;
 
 const generateToken = (payload: TUser) => {
-    console.log(jwtSecretKey, payload);
     const token = jwt.sign(payload, jwtSecretKey, { expiresIn: 3600 });
-    console.log(token);
     return token;
 };
 
@@ -20,21 +18,21 @@ const login = async (username: string, password: string) => {
         const user = await User.findOne({ username: username });
 
         if(!user){
-            return {message: "Authentication failed"}
+            return {message: "User not found", status: 404}
         }
 
         const passwordMatch = await bcrypt.compare(password, user.password);
 
         if(passwordMatch){
             const token = generateToken({username: user.username });
-            return token
+            return {message: token, status: 200};
         }
         else{
-            return {message: "Authentication failed"}
+            return {message: "Wrong Password", status: 401}
         }
 
     }catch(err){
-        return {message: "Something went wrong"}
+        return {message: "Something went wrong", status: 500}
     }
 };
 
@@ -45,9 +43,9 @@ const register = async (username: string, password: string) => {
         try{
             console.log();
             const user = await User.create({username: username, password: hashedPassword});
-            return user;
+            return {user, status: 200};
         } catch(err){
-           return {message: "Something went wrong"};
+           return {message: "Could not create user", status: 500, err: err}
         }
 };
 
