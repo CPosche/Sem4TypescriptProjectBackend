@@ -4,6 +4,7 @@ import User from "../models/UserModel";
 import bcrypt from "bcrypt";
 import { Request, Response } from 'express';
 import { TUser } from '../utils/types';
+import UserModel from "../models/UserModel";
 dotenv.config();
 
 const jwtSecretKey: string = process.env.JWT_SECRET_KEY!;
@@ -42,13 +43,21 @@ const register = async (username: string, password: string) => {
 
         const hashedPassword = await bcrypt.hash(password, 10);
 
-        try{
-            console.log();
-            const user = await User.create({username: username, password: hashedPassword});
-            return user;
-        } catch(err){
-           return {message: "Something went wrong"};
+        const testUsername = await UserModel.findOne({username: username});
+        if(!testUsername){
+            try{
+                console.log(username, hashedPassword)
+                const user = await User.create({username: username, password: hashedPassword});
+                console.log("Hello");
+                return {user, status:200};
+            } catch(err){
+                return {user: null , status: 400};
+            }
         }
+        else{
+            return {user: null , status: 400};
+        }
+
 };
 
 const JWTController = {
