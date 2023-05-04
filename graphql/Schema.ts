@@ -86,9 +86,15 @@ const typeDefs = gql`
     classes: [Class]
     users: [User]
   }
+
+  type Token {
+    message: String!
+    status: Int!
+  }
+
   
   type Mutation {
-    login(username: String!, password: String!): String
+    login(username: String!, password: String!): Token
     register(username: String!, password: String!): returnedUser
     addFavoriteClass(username: String! classId: ID!): returnedUser
   }
