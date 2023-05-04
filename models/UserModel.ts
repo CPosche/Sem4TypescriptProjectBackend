@@ -16,7 +16,20 @@ const UserSchema: mongoose.Schema = new mongoose.Schema({
         ref: 'Class',
         required: false
     },
+});
 
+UserSchema.pre(/^find/, function (next) {
+    this.populate({
+        path: 'favoriteClass',
+    });
+    next();
+});
+
+UserSchema.pre(/^save/, function (next) {
+    this.populate({
+        path: 'favoriteClass',
+    });
+    next();
 });
 
 const User = mongoose.model('User', UserSchema);
