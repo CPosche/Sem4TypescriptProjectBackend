@@ -73,7 +73,7 @@ const typeDefs = gql`
     username: String!
     password: String!
   }
-  
+
   type returnedUser {
     username: String!
     id: ID!
@@ -86,15 +86,10 @@ const typeDefs = gql`
     users: [User]
   }
 
-  
   type Mutation {
     login(username: String!, password: String!): String
     register(username: String!, password: String!): returnedUser
   }
 `;
-
-
-
-
 
 export default typeDefs;
