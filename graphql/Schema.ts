@@ -18,6 +18,7 @@ const typeDefs = gql`
   type Spec {
     name: String!
     mainstat: String!
+    id: ID!
   }
 
   type Item {
