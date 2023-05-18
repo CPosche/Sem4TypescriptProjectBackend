@@ -10,7 +10,7 @@ const DungeonSchema = new mongoose.Schema({
     required: true,
   },
   items: {
-    type: Array<mongoose.Types.ObjectId>,
+    type: Array<mongoose.Types.ObjectId>(),
     ref: "Item",
   },
 });

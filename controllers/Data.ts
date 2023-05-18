@@ -100,6 +100,18 @@ const getDungeons = async (req: Request, res: Response) => {
   });
 };
 
+const getDungeonNames = async (id:string) => {
+    let name:string;
+    const dungeons = await DungeonModel.findById(id);
+    if(dungeons){
+      name = dungeons.name;
+    }
+    else {
+      name = "Dungeon not found";
+    }
+    return name;
+}
+
 const getItemIds = async (encounters: any[], access_token: string) => {
   let itemids: Number[] = [];
   for (let encounter of encounters) {
@@ -143,6 +155,7 @@ const data = {
   getClasses,
   getDungeons,
   getDungeonsFromDB,
+  getDungeonNames,
 };
 
 export default data;
