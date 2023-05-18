@@ -1,7 +1,9 @@
 import JWTController from "../../controllers/JWTController";
-import {Args, TUser} from "../../utils/types";
+import {Args, calcData, dungeonID, TUser} from "../../utils/types";
 import userModel from "../../models/UserModel";
 import User from "../../models/UserModel";
+import ItemController from "../../controllers/ItemController";
+import MathController from "../../controllers/MathController";
 
 export default {
 
@@ -20,5 +22,22 @@ export default {
             const user = await userModel.findOne({username: username});
             return {user, status: 200};
         }
+    },
+
+    getItemsFromSpecificDungeon: async (_parent: never, {ID}: dungeonID) => {
+        const items = await ItemController.getItemsFromSpecificDungeon(ID);
+        return items;
+
+    },
+
+
+    getItemsFromStatWeight: async (_parent: never, calcData:calcData) => {
+        const items = await MathController.getItemsFromStatWeight(calcData);
+        return items;
     }
+
+
+
+
+
 }

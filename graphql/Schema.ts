@@ -21,9 +21,19 @@ const typeDefs = gql`
   }
 
   type Item {
-    name: String!
+    name: String
     preview_item: PreviewItem
   }
+  
+  type itemList {
+    items: [Item]    
+  }
+  
+  type itemListList{
+    itemList: [itemList]
+  }
+  
+
 
   type PreviewItem {
     inventory_type: InventoryType
@@ -86,17 +96,35 @@ const typeDefs = gql`
     classes: [Class]
     users: [User]
   }
+  
+  type DungeonItems {
+    dungeons: [String]
+    Items: [[Item]]
+  }
 
   type Token {
     message: String!
     status: Int!
   }
-
+  input classDataInput{
+    mainStat: String,
+    armorType: String,
+  }
+  
+ 
+  
+input calcDataInput {
+  classData: classDataInput,
+  dungeons: [String],
+  statPriority: [String],
+}
   
   type Mutation {
     login(username: String!, password: String!): Token
     register(username: String!, password: String!): returnedUser
     addFavoriteClass(username: String! classId: ID!): returnedUser
+    getItemsFromSpecificDungeon(ID: ID!): itemList
+    getItemsFromStatWeight(calcData: calcDataInput): DungeonItems
   }
 `;
 

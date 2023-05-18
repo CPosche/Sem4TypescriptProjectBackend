@@ -6,7 +6,7 @@ const ClassSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  specs: Array<TSpec>,
+  specs: Array<TSpec>(),
   armortype: {
     type: String,
     required: true,

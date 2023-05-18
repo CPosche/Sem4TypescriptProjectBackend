@@ -37,6 +37,11 @@ export type TStatType = {
   name: string;
 };
 
+export type TStatWeight = {
+    type: string;
+    value: number;
+}
+
 export type TStatDisplay = {
   display_string: string;
   color: { r: Number; g: Number; b: Number; a: Number };
@@ -68,6 +73,11 @@ export type TItemSubclass = {
 
 export type TUser = {
   username: string;
+};
+
+export type stat={
+    type: string;
+    value: number;
 }
 
 
@@ -79,4 +89,29 @@ export type Args = {
   username: string;
   password?: string;
   classId?: string;
+
+}
+
+export type dungeonID = {
+  ID: mongoose.Types.ObjectId;
+}
+
+export type dungeonNames = {
+    name: string;
+}
+
+type classDataOutput = {
+  mainStat: String,
+  armorType: String,
+}
+
+
+
+export type calcData = {
+  calcData:{
+    classData: classDataOutput,
+    dungeons: [string],
+    statPriority: [string]
+  }
+
 }
