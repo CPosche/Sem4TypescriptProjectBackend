@@ -50,6 +50,8 @@ export type TStatDisplay = {
 export type TItem = {
   _id?: mongoose.Types.ObjectId;
   name: string;
+  media?: { id: Number };
+  image: string;
   preview_item: TPreviewItem;
 };
 

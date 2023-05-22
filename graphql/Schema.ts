@@ -23,6 +23,7 @@ const typeDefs = gql`
 
   type Item {
     name: String
+    image: String
     preview_item: PreviewItem
   }
 

@@ -18,6 +18,14 @@ import DungeonModel from "../models/DungeonModel";
 import mongoose from "mongoose";
 import OAuth from "../utils/OAuth";
 
+const getItemImage = async (mediaid: Number) => {
+  const access_token = await OAuth.getAccessToken();
+  const apiurl = `https://us.api.blizzard.com/data/wow/media/item/${mediaid}?namespace=static-us&locale=en_US&access_token=${access_token}`;
+  const data = await axios.get(apiurl).then((res) => res.data);
+  return data.assets[0].value;
+};
+
+
 const getItem = async (itemids: Number[]) => {
   const access_token = await OAuth.getAccessToken();
   let items: mongoose.Types.ObjectId[] = [];
@@ -25,6 +33,7 @@ const getItem = async (itemids: Number[]) => {
     const apiurl = `https://us.api.blizzard.com/data/wow/item/${itemid}?namespace=static-us&locale=en_US&access_token=${access_token}`;
     const data = await axios.get<TItem>(apiurl).then((res) => res.data);
     if (data.preview_item.inventory_type.type === "NON_EQUIP") continue;
+    const image = await getItemImage(data.media!.id);
     const inventory_type: TInventoryType = {
       type: data.preview_item.inventory_type.type,
       name: data.preview_item.inventory_type.name,
@@ -62,6 +71,7 @@ const getItem = async (itemids: Number[]) => {
     };
     const item: TItem = {
       name: data.name,
+      image: image,
       preview_item: preview_item,
     };
     ItemModel.create(item).then((item) => {
